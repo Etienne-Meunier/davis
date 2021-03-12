@@ -37,7 +37,7 @@ import skimage.io
 import numpy as np
 
 from davis import log
-from davis.measures import db_eval_boundary,db_eval_iou,db_eval_t_stab
+from davis.measures import db_eval_boundary, db_eval_iou,db_eval_t_stab
 
 def _load_annotation(fname,img_num=0):
 	return skimage.io.imread(fname,as_grey=True)
@@ -107,9 +107,9 @@ class DAVISSegmentationLoader(object):
 
 		self._frames = list(range(masks_frames[0],
 			len(self._images)+masks_frames[0]))
-
+		print(masks_dir)
+		print(len(self._frames), len(self._masks), len(self._images))
 		assert len(self._frames) == len(self._masks) == len(self._images)
-
 		# Compute bounding boxes
 		self._bbs = []
 		for mask in self._masks:
