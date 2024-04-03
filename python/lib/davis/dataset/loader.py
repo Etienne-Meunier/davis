@@ -35,10 +35,9 @@ import os
 import copy
 import skimage.io
 import numpy as np
-from pdb import set_trace
 
 from davis import log
-from davis.measures import db_eval_boundary, db_eval_iou,db_eval_t_stab
+from davis.measures import db_eval_boundary,db_eval_iou,db_eval_t_stab
 
 def _load_annotation(fname,img_num=0):
 	return skimage.io.imread(fname,as_grey=True)
@@ -64,8 +63,10 @@ class DAVISSegmentationLoader(object):
 	"""
 	def __init__(self,cfg,sequence,masks_dir=None,ext_im="jpg",
 			ext_an="png", load_func=_load_annotation):
-		print(sequence)
+
 		super(DAVISSegmentationLoader, self).__init__()
+
+		print(sequence)		
 
 		self._cfg				= cfg
 		self.name				= sequence
@@ -90,13 +91,13 @@ class DAVISSegmentationLoader(object):
 		#########################################
 		self._images = skimage.io.ImageCollection(self.images_dir+"/*%s"%self._ext_im)
 
-		print('mask dir :', self.masks_dir)
 		self._masks = skimage.io.ImageCollection(self.masks_dir+"/*%s"%self._ext_an,
 				load_func=_load_annotation)
 
 		#assert len(self._masks) != 0 and len(self._images) != 0
 		masks_frames = map(lambda fn:
 				int(os.path.splitext(os.path.basename(fn))[0]),self._masks.files)
+
 		# Loading the ground-truth annotations
 		if masks_dir is None:
 			assert len(self._images) == len(self._masks)
@@ -108,9 +109,9 @@ class DAVISSegmentationLoader(object):
 
 		self._frames = list(range(masks_frames[0],
 			len(self._images)+masks_frames[0]))
-		print(masks_dir)
-		print(len(self._frames), len(self._masks), len(self._images))
+
 		assert len(self._frames) == len(self._masks) == len(self._images)
+
 		# Compute bounding boxes
 		self._bbs = []
 		for mask in self._masks:

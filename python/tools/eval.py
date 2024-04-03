@@ -19,17 +19,15 @@ EXAMPLE:
 import os
 import time
 import argparse
-import sys
 
+import sys
+sys.path.append('/home/etienne/Desktop/davis/python/lib')
 
 import numpy   as np
 import os.path as osp
 
 from prettytable import PrettyTable
-sys.path.append(os.environ["Codinria"]+"/davis/python/lib/")
-sys.path.append(os.environ["Codinria"]+"/davis/python/lib/davis/dataset/")
-sys.path.append(os.environ["Codinria"]+"/davis/python/lib/davis/measures/")
-from utils import db_eval,db_save_eval
+from davis.dataset import db_eval,db_save_eval
 from davis import cfg,log
 
 def parse_args():
@@ -57,8 +55,6 @@ def parse_args():
 if __name__ == '__main__':
 
 	args       = parse_args()
-
-	args.metrics = ['J', 'F']
 	args.input = osp.abspath(args.input)
 
 	db_eval_dict = db_eval(osp.basename(args.input),

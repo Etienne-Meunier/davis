@@ -19,15 +19,15 @@ EXAMPLE:
 import os
 import time
 import argparse
+
+
 import sys
+sys.path.append('/home/etienne/Desktop/davis/python/lib')
 
 import numpy   as np
 import os.path as osp
 
 from prettytable import PrettyTable as ptable
-sys.path.append(os.environ["Codinria"]+"/davis/python/lib/")
-sys.path.append(os.environ["Codinria"]+"/davis/python/lib/davis/dataset/")
-sys.path.append(os.environ["Codinria"]+"/davis/python/lib/davis/measures/")
 from davis.dataset import *
 from davis import log
 
